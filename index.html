@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCTV Storage Calculator</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <main class="calculator-card">
+        <!-- Top Navigation Bar (Kembali & Toggle Theme) -->
+        <div class="top-bar">
+            <a href="http://mx/home/" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Kembali</span>
+            </a>
+            <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+
+        <header class="card-header">
+            <div class="icon-badge">
+                <i class="fa-solid fa-video"></i>
+            </div>
+            <h2>CCTV Storage Calculator</h2>
+            <p>Hitung estimasi kapasitas MicroSD untuk IP Camera Anda</p>
+        </header>
+
+        <form id="calcForm" onsubmit="event.preventDefault();">
+            <!-- Grid Layout Input -->
+            <div class="form-grid">
+                
+                <!-- Resolusi -->
+                <div class="form-group full-width">
+                    <label for="resolution"><i class="fa-solid fa-display"></i> Resolusi & Megapixel</label>
+                    <div class="select-wrapper">
+                        <select id="resolution">
+                            <option value="2" data-bitrate="2048">2 MP - Full HD 1080p (1920x1080)</option>
+                            <option value="3" data-bitrate="3072">3 MP - 2K (2304x1296)</option>
+                            <option value="4" data-bitrate="4096">4 MP - 2K+ (2560x1440)</option>
+                            <option value="5" data-bitrate="5120">5 MP - 3K (2880x1620)</option>
+                            <option value="8" data-bitrate="8192">8 MP - 4K UHD (3840x2160)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Codec -->
+                <div class="form-group">
+                    <label for="codec"><i class="fa-solid fa-file-video"></i> Codec Video</label>
+                    <div class="select-wrapper">
+                        <select id="codec">
+                            <option value="0.5">H.265 / H.265+ (Hemat)</option>
+                            <option value="1.0">H.264 (Standar)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Mode Rekam -->
+                <div class="form-group">
+                    <label for="mode"><i class="fa-solid fa-clock"></i> Mode Rekam</label>
+                    <div class="select-wrapper">
+                        <select id="mode">
+                            <option value="24">24 Jam Nonstop</option>
+                            <option value="8">Motion Detection (~8 Jam)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Hari -->
+                <div class="form-group full-width">
+                    <label for="daysInput"><i class="fa-solid fa-calendar-days"></i> Lama Perekaman (Hari)</label>
+                    <div class="input-range-wrapper">
+                        <input type="number" id="daysInput" value="1" min="1" max="365">
+                        <input type="range" id="daysSlider" value="1" min="1" max="30">
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+        <!-- Dynamic Results Card -->
+        <section class="result-section">
+            <div class="result-card primary">
+                <div class="result-icon"><i class="fa-solid fa-microchip"></i></div>
+                <div class="result-info">
+                    <span class="label">Rekomendasi MicroSD</span>
+                    <h3 id="recommendedText">-</h3>
+                </div>
+            </div>
+
+            <div class="result-grid">
+                <div class="result-card secondary">
+                    <span class="label">Estimasi / Hari</span>
+                    <p id="perDayText">0 GB</p>
+                </div>
+                <div class="result-card secondary">
+                    <span class="label">Total Kebutuhan</span>
+                    <p id="totalReqText">0 GB</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
